@@ -2,7 +2,6 @@ import 'dotenv/config';
 import express from 'express';
 import routes from './routes';
 import { errorHandler } from './middleware/errorHandler';
-import syncDatabase from './models/syncDb';
 
 const app = express();
 const port = (process.env.PORT && parseInt(process.env.PORT)) || 8080;

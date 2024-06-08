@@ -5,8 +5,8 @@
     "start": "node dist/index.js",
     "dev": "tsx watch src/index.ts",
     "build": "babel src --out-dir dist --extensions \".ts\"",
-    "lint": "eslint . --ext .ts",
-    "lint:fix": "eslint . --ext .ts --fix",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
     "format": "prettier --write \"src/**/*.ts\"",
     "type-check": "tsc --noEmit",
     "prepare": "husky"
@@ -27,6 +27,7 @@
     "@babel/core": "^7.24.5",
     "@babel/preset-env": "^7.24.5",
     "@babel/preset-typescript": "^7.24.1",
+    "@eslint/js": "^9.4.0",
     "@types/babel__core": "^7",
     "@types/babel__preset-env": "^7",
     "@types/eslint": "^8.56.10",
@@ -35,9 +36,7 @@
     "@types/node": "^20.12.12",
     "@types/nodemailer": "^6",
     "@types/pg": "^8",
-    "@typescript-eslint/eslint-plugin": "^7.9.0",
-    "@typescript-eslint/parser": "^7.9.0",
-    "eslint": "^9.3.0",
+    "eslint": "^9.4.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
     "husky": "^9.0.11",
@@ -45,7 +44,8 @@
     "prettier": "^3.2.5",
     "sequelize-cli": "^6.6.2",
     "tsx": "^4.10.4",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.12.0"
   },
   "lint-staged": {
     "src/**/*.ts": [
