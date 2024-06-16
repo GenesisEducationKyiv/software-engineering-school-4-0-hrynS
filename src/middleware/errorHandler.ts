@@ -1,12 +1,7 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import createError from 'http-errors';
 
-export const errorHandler = (
-  err: unknown,
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const errorHandler = (err: unknown, req: Request, res: Response) => {
   const timestamp = new Date().toISOString();
   console.error(`[${timestamp}] Error:`, err);
 
