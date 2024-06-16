@@ -7,13 +7,9 @@ interface UserAttributes {
   subscribedAt: Date;
 }
 
-interface UserCreationAttributes
-  extends Optional<UserAttributes, 'id' | 'subscribedAt'> {}
+interface UserCreationAttributes extends Optional<UserAttributes, 'id' | 'subscribedAt'> {}
 
-class User
-  extends Model<UserAttributes, UserCreationAttributes>
-  implements UserAttributes
-{
+class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
   public id!: number;
   public email!: string;
   public subscribedAt!: Date;

@@ -16,11 +16,7 @@ export const subscribe = asyncHandler(async (req: Request, res: Response) => {
   // await Subscription.create({ userId: user.id, baseCurrencyCode: CurrencyCodes.UAH, targetCurrencyCode: CurrencyCodes.USD, });
 
   // TODO: used for testing, remove when the daily job is setup
-  await emailService.sendEmail(
-    email,
-    'Subscription Successful',
-    'Thank you for subscribing!',
-  );
+  await emailService.sendEmail(email, 'Subscription Successful', 'Thank you for subscribing!');
 
   res.status(200).json({ message: 'Subscribed successfully' });
 });

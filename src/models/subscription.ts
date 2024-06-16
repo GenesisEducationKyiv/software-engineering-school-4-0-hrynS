@@ -10,8 +10,7 @@ interface SubscriptionAttributes {
   targetCurrencyCode: number;
 }
 
-interface SubscriptionCreationAttributes
-  extends Optional<SubscriptionAttributes, 'id'> {}
+interface SubscriptionCreationAttributes extends Optional<SubscriptionAttributes, 'id'> {}
 
 class Subscription
   extends Model<SubscriptionAttributes, SubscriptionCreationAttributes>

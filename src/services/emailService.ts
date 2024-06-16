@@ -4,11 +4,7 @@ class EmailService {
   private transporter;
 
   constructor() {
-    if (
-      !process.env.EMAIL ||
-      !process.env.EMAIL_PASSWORD ||
-      !process.env.EMAIL_SERVICE
-    ) {
+    if (!process.env.EMAIL || !process.env.EMAIL_PASSWORD || !process.env.EMAIL_SERVICE) {
       throw new Error(
         'EMAIL, EMAIL_PASSWORD or EMAIL_SERVICE is not defined in environment variables',
       );
@@ -23,11 +19,7 @@ class EmailService {
     });
   }
 
-  public async sendEmail(
-    email: string,
-    subject: string,
-    text: string,
-  ): Promise<void> {
+  public async sendEmail(email: string, subject: string, text: string): Promise<void> {
     await this.transporter.sendMail({
       from: process.env.EMAIL,
       to: email,

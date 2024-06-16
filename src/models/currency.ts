@@ -6,8 +6,7 @@ interface CurrencyAttributes {
   code: number;
 }
 
-interface CurrencyCreationAttributes
-  extends Optional<CurrencyAttributes, 'name'> {}
+interface CurrencyCreationAttributes extends Optional<CurrencyAttributes, 'name'> {}
 
 class Currency
   extends Model<CurrencyAttributes, CurrencyCreationAttributes>

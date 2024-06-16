@@ -15,9 +15,7 @@ class CurrencyService {
 
   constructor() {
     if (!process.env.CURRENCY_DATA_PROVIDER_URL) {
-      throw new Error(
-        'CURRENCY_DATA_PROVIDER_URL is not defined in environment variables',
-      );
+      throw new Error('CURRENCY_DATA_PROVIDER_URL is not defined in environment variables');
     }
     this.apiUrl = process.env.CURRENCY_DATA_PROVIDER_URL;
   }
@@ -31,10 +29,7 @@ class CurrencyService {
       const response = await axios.get<TExchangeRate[]>(this.apiUrl);
 
       const rate = response.data.find((rate) => {
-        return (
-          baseCurrencyCode === rate.currencyCodeB &&
-          currencyCode === rate.currencyCodeA
-        );
+        return baseCurrencyCode === rate.currencyCodeB && currencyCode === rate.currencyCodeA;
       });
 
       if (!rate) {

@@ -11,8 +11,7 @@ interface ExchangeRateAttributes {
   targetCurrencyCode: number;
 }
 
-interface ExchangeRateCreationAttributes
-  extends Optional<ExchangeRateAttributes, 'id'> {}
+interface ExchangeRateCreationAttributes extends Optional<ExchangeRateAttributes, 'id'> {}
 
 class ExchangeRate
   extends Model<ExchangeRateAttributes, ExchangeRateCreationAttributes>
