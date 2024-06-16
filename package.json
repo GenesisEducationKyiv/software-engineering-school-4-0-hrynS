@@ -9,6 +9,7 @@
     "lint:fix": "eslint src --fix",
     "format": "prettier --write \"src/**/*.ts\"",
     "type-check": "tsc --noEmit",
+    "test": "jest ./src",
     "prepare": "husky"
   },
   "dependencies": {
@@ -54,6 +55,7 @@
     "src/**/*.ts": [
       "prettier --write",
       "eslint --fix",
+      "jest --findRelatedTests",
       "bash -c 'tsc --noEmit'"
     ]
   },

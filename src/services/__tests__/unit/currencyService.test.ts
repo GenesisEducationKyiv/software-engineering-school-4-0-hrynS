@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { CurrencyCodes } from '../../constants/currencyCodes';
-import { ICurrencyService } from '../currencyService';
-import { exchangeRateData } from './__mocks__/exchangeRates';
+import { CurrencyCodes } from '../../../constants/currencyCodes';
+import { ICurrencyService } from '../../currencyService';
+import { exchangeRateData } from '../__mocks__/exchangeRates';
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -13,7 +13,7 @@ describe('CurrencyService', () => {
   beforeAll(async () => {
     const apiUrl = 'http://example.com/api';
     process.env.CURRENCY_DATA_PROVIDER_URL = apiUrl;
-    Service = await import('../currencyService').then((file) => file.default);
+    Service = await import('../../currencyService').then((file) => file.default);
     CurrencyService = new Service();
     mockedAxios.get.mockResolvedValue({ data: exchangeRateData });
   });
@@ -116,8 +116,9 @@ describe('CurrencyService', () => {
 
   describe('Edge cases', () => {
     it('should throw an error if the CURRENCY_DATA_PROVIDER_URL is not defined', async () => {
-      expect(async () => new Service()).rejects.toThrow(
-        'CURRENCY_DATA_PROVIDER_URL is not defined in environment' + ' variables',
+      delete process.env.CURRENCY_DATA_PROVIDER_URL;
+      expect(() => new Service()).toThrow(
+        'CURRENCY_DATA_PROVIDER_URL is not defined in environment variables',
       );
     });
 

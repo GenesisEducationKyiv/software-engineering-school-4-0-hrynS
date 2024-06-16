@@ -22,7 +22,6 @@ class CurrencyService implements ICurrencyService {
   private apiUrl: string;
 
   constructor() {
-    console.log('from constructor', process.env.CURRENCY_DATA_PROVIDER_URL);
     if (!process.env.CURRENCY_DATA_PROVIDER_URL) {
       throw new Error('CURRENCY_DATA_PROVIDER_URL is not defined in environment variables');
     }
