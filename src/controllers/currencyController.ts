@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
-import CurrencyService from '../services/currencyService';
+import { CurrencyService } from '../services';
 import { CurrencyCodes } from '../constants/currencyCodes';
 
 export const getRate = asyncHandler(async (req: Request, res: Response) => {

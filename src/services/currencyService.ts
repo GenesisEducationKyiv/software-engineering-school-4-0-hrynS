@@ -10,10 +10,19 @@ type TExchangeRate = {
   rateSell: number;
 };
 
-class CurrencyService {
+export interface ICurrencyService {
+  getExchangeRate(
+    baseCurrencyCode?: CurrencyCodes,
+    currencyCode?: CurrencyCodes,
+    isBidRate?: boolean,
+  ): Promise<number>;
+}
+
+class CurrencyService implements ICurrencyService {
   private apiUrl: string;
 
   constructor() {
+    console.log('from constructor', process.env.CURRENCY_DATA_PROVIDER_URL);
     if (!process.env.CURRENCY_DATA_PROVIDER_URL) {
       throw new Error('CURRENCY_DATA_PROVIDER_URL is not defined in environment variables');
     }
@@ -26,6 +35,14 @@ class CurrencyService {
     isBidRate: boolean = false,
   ): Promise<number> {
     try {
+      if (!CurrencyCodes[baseCurrencyCode]) {
+        throw createError(400, 'Invalid base currency code');
+      }
+
+      if (!CurrencyCodes[currencyCode]) {
+        throw createError(400, 'Invalid target currency code');
+      }
+
       const response = await axios.get<TExchangeRate[]>(this.apiUrl);
 
       const rate = response.data.find((rate) => {
@@ -38,10 +55,14 @@ class CurrencyService {
 
       return isBidRate ? rate.rateBuy : rate.rateSell;
     } catch (error) {
+      if (createError.isHttpError(error)) {
+        throw error;
+      }
+
       console.error('Failed to fetch exchange rate:', error);
       throw createError(500, 'Failed to fetch exchange rate');
     }
   }
 }
 
-export default new CurrencyService();
+export default CurrencyService;
