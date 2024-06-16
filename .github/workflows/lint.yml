@@ -1,0 +1,45 @@
+name: ESLint check
+run-name: ${{ github.actor }} is linting the commit with hash - ${{ github.sha }}
+on: push
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Enable Corepack
+      run: corepack enable
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.19'
+
+    - name: Install latest Yarn
+      run: corepack prepare yarn@4.1.1 --activate
+
+    - name: Activate latest Yarn
+      run: yarn set version 4.1.1
+
+    - name: Cache Yarn dependencies
+      id: yarn-cache
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.yarn/cache
+          node_modules
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
+
+    - name: Install dependencies
+      run: yarn install
+
+    - name: Run ESLint
+      run: yarn eslint src
+      continue-on-error: true
